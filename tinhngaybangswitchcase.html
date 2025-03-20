@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number of Days in Month</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 5px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="number" id="monthInput" placeholder="Nhập tháng (1-12)" min="1" max="12">
+        <input type="number" id="yearInput" placeholder="Nhập năm" min="1">
+        <button onclick="calculateDays()">Tính số ngày</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateDays() {
+            const month = parseInt(document.getElementById("monthInput").value);
+            const year = parseInt(document.getElementById("yearInput").value);
+            let days;
+            
+            switch (month) {
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    days = 31;
+                    break;
+                case 4: case 6: case 9: case 11:
+                    days = 30;
+                    break;
+                case 2:
+                    if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                        days = 29; // Năm nhuận
+                    } else {
+                        days = 28;
+                    }
+                    break;
+                default:
+                    document.getElementById("result").innerText = "Vui lòng nhập số tháng hợp lệ (1-12).";
+                    return;
+            }
+            document.getElementById("result").innerText = `Tháng ${month} năm ${year} có ${days} ngày`;
+        }
+    </script>
+</body>
+</html>
