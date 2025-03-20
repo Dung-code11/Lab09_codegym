@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Ball</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #ball {
+            position: relative;
+            left: 0px;
+            transition: left 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="ball" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Football_with_shade.svg" width="100" alt="Ball">
+        <br>
+        <button onclick="moveBall()">Click Me</button>
+    </div>
+
+    <script>
+        let position = 0;
+        let direction = 1; // 1: right, -1: left
+
+        function moveBall() {
+            position += 50 * direction;
+            document.getElementById("ball").style.left = position + "px";
+            direction *= -1; // Đảo chiều di chuyển
+        }
+    </script>
+</body>
+</html>
