@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Lương Nhân Viên</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        label, select, input { display: block; margin: 10px 0; }
+        button { padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: darkblue; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Tính Lương Nhân Viên</h2>
+        <label for="years">Số năm làm việc:</label>
+        <input type="number" id="years" min="0" required>
+        
+        <div id="shifts">
+            <div class="shift-entry">
+                <label>Ca làm việc:</label>
+                <select class="shift">
+                    <option value="sang">Ca sáng</option>
+                    <option value="chieu">Ca chiều</option>
+                    <option value="dem">Ca đêm</option>
+                </select>
+                <label>Số giờ làm:</label>
+                <input type="number" class="hours" min="1" required>
+            </div>
+        </div>
+        
+        <button onclick="themCa()">Thêm ca</button>
+        <button onclick="tinhLuong()">Tính lương</button>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function themCa() {
+            let shiftContainer = document.getElementById("shifts");
+            let newShift = document.createElement("div");
+            newShift.classList.add("shift-entry");
+            newShift.innerHTML = `
+                <label>Ca làm việc:</label>
+                <select class="shift">
+                    <option value="sang">Ca sáng</option>
+                    <option value="chieu">Ca chiều</option>
+                    <option value="dem">Ca đêm</option>
+                </select>
+                <label>Số giờ làm:</label>
+                <input type="number" class="hours" min="1" required>
+                <button onclick="xoaCa(this)">Xóa</button>
+            `;
+            shiftContainer.appendChild(newShift);
+        }
+        
+        function xoaCa(button) {
+            button.parentElement.remove();
+        }
+        
+        function tinhLuong() {
+            let years = parseFloat(document.getElementById("years").value);
+            let shiftElements = document.querySelectorAll(".shift-entry");
+            
+            let salaryRates = { "sang": 50000, "chieu": 55000, "dem": 70000 };
+            let totalHours = 0;
+            let totalSalary = 0;
+            
+            shiftElements.forEach(entry => {
+                let shift = entry.querySelector(".shift").value;
+                let hours = parseFloat(entry.querySelector(".hours").value);
+                totalHours += hours;
+                totalSalary += hours * salaryRates[shift];
+            });
+            
+            if (totalHours > 8) {
+                let overtimeHours = totalHours - 8;
+                let overtimePay = overtimeHours * (totalSalary / totalHours) * 1.2;
+                totalSalary += overtimePay;
+            }
+            
+            let seniorityBonus = years >= 1 && years <= 3 ? 0.05 : years > 3 ? 0.1 : 0;
+            totalSalary += totalSalary * seniorityBonus;
+            
+            document.getElementById("result").innerText = "Tổng lương: " + totalSalary.toLocaleString("vi-VN") + " VNĐ";
+        }
+    </script>
+</body>
+</html>
