@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập JavaScript</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 60%; margin: auto; }
+        .task { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { margin-top: 10px; padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bài tập JavaScript</h2>
+
+        <!-- Bài 1 -->
+        <div class="task">
+            <h3>Bài 1: Chuyển từ độ C sang độ F</h3>
+            <input type="number" id="celsius" placeholder="Nhập độ C">
+            <button onclick="convertCtoF()">Chuyển đổi</button>
+            <p id="result1"></p>
+        </div>
+
+        <!-- Bài 2 -->
+        <div class="task">
+            <h3>Bài 2: Chuyển từ mét sang feet</h3>
+            <input type="number" id="meter" placeholder="Nhập số mét">
+            <button onclick="convertMeterToFeet()">Chuyển đổi</button>
+            <p id="result2"></p>
+        </div>
+
+        <!-- Bài 3 -->
+        <div class="task">
+            <h3>Bài 3: Tính diện tích hình vuông</h3>
+            <input type="number" id="squareSide" placeholder="Nhập cạnh a">
+            <button onclick="squareArea()">Tính</button>
+            <p id="result3"></p>
+        </div>
+
+        <!-- Bài 4 -->
+        <div class="task">
+            <h3>Bài 4: Tính diện tích hình chữ nhật</h3>
+            <input type="number" id="rectA" placeholder="Nhập cạnh a">
+            <input type="number" id="rectB" placeholder="Nhập cạnh b">
+            <button onclick="rectangleArea()">Tính</button>
+            <p id="result4"></p>
+        </div>
+
+        <!-- Bài 5 -->
+        <div class="task">
+            <h3>Bài 5: Tính diện tích tam giác vuông</h3>
+            <input type="number" id="triA" placeholder="Nhập cạnh a">
+            <input type="number" id="triB" placeholder="Nhập cạnh b">
+            <button onclick="triangleArea()">Tính</button>
+            <p id="result5"></p>
+        </div>
+
+        <!-- Bài 6 -->
+        <div class="task">
+            <h3>Bài 6: Giải phương trình bậc 1 (ax + b = 0)</h3>
+            <input type="number" id="eq1A" placeholder="Nhập a">
+            <input type="number" id="eq1B" placeholder="Nhập b">
+            <button onclick="solveLinear()">Giải</button>
+            <p id="result6"></p>
+        </div>
+
+        <!-- Bài 7 -->
+        <div class="task">
+            <h3>Bài 7: Giải phương trình bậc 2 (ax² + bx + c = 0)</h3>
+            <input type="number" id="eq2A" placeholder="Nhập a">
+            <input type="number" id="eq2B" placeholder="Nhập b">
+            <input type="number" id="eq2C" placeholder="Nhập c">
+            <button onclick="solveQuadratic()">Giải</button>
+            <p id="result7"></p>
+        </div>
+
+        <!-- Bài 8 -->
+        <div class="task">
+            <h3>Bài 8: Kiểm tra số có phải tuổi người không</h3>
+            <input type="number" id="ageCheck" placeholder="Nhập số">
+            <button onclick="checkAge()">Kiểm tra</button>
+            <p id="result8"></p>
+        </div>
+
+        <!-- Bài 9 -->
+        <div class="task">
+            <h3>Bài 9: Kiểm tra ba cạnh tam giác</h3>
+            <input type="number" id="sideA" placeholder="Nhập a">
+            <input type="number" id="sideB" placeholder="Nhập b">
+            <input type="number" id="sideC" placeholder="Nhập c">
+            <button onclick="checkTriangle()">Kiểm tra</button>
+            <p id="result9"></p>
+        </div>
+<!-- Bài 10 -->
+<div class="task">
+    <h3>Bài 10: Tính tiền điện</h3>
+    <input type="number" id="electricity" placeholder="Nhập số kWh">
+    <button onclick="calculateElectricityBill()">Tính tiền</button>
+    <p id="result10"></p>
+</div>
+
+<!-- Bài 11 -->
+<div class="task">
+    <h3>Bài 11: Tính thuế thu nhập cá nhân</h3>
+    <input type="number" id="salary" placeholder="Nhập thu nhập hàng tháng">
+    <button onclick="calculateTax()">Tính thuế</button>
+    <p id="result11"></p>
+</div>
+
+<!-- Bài 12 -->
+<div class="task">
+    <h3>Bài 12: Tính lãi ngân hàng (Lãi kép)</h3>
+    <input type="number" id="principal" placeholder="Nhập số tiền ban đầu">
+    <input type="number" id="months" placeholder="Nhập số tháng">
+    <input type="number" id="interestRate" placeholder="Nhập lãi suất/tháng (%)">
+    <button onclick="calculateBankInterest()">Tính lãi</button>
+    <p id="result12"></p>
+</div>
+    </div>
+
+    <script>
+        function convertCtoF() {
+            let c = parseFloat(document.getElementById("celsius").value);
+            let f = (c * 9/5) + 32;
+            document.getElementById("result1").innerText = c + "°C = " + f.toFixed(2) + "°F";
+        }
+
+        function convertMeterToFeet() {
+            let m = parseFloat(document.getElementById("meter").value);
+            let ft = m * 3.2808;
+            document.getElementById("result2").innerText = m + "m = " + ft.toFixed(2) + "ft";
+        }
+
+        function squareArea() {
+            let a = parseFloat(document.getElementById("squareSide").value);
+            document.getElementById("result3").innerText = "Diện tích: " + (a * a);
+        }
+
+        function rectangleArea() {
+            let a = parseFloat(document.getElementById("rectA").value);
+            let b = parseFloat(document.getElementById("rectB").value);
+            document.getElementById("result4").innerText = "Diện tích: " + (a * b);
+        }
+
+        function triangleArea() {
+            let a = parseFloat(document.getElementById("triA").value);
+            let b = parseFloat(document.getElementById("triB").value);
+            document.getElementById("result5").innerText = "Diện tích: " + ((a * b) / 2);
+        }
+
+        function solveLinear() {
+            let a = parseFloat(document.getElementById("eq1A").value);
+            let b = parseFloat(document.getElementById("eq1B").value);
+            document.getElementById("result6").innerText = a == 0 ? (b == 0 ? "Vô số nghiệm" : "Vô nghiệm") : "Nghiệm x = " + (-b / a);
+        }
+
+        function solveQuadratic() {
+            let a = parseFloat(document.getElementById("eq2A").value);
+            let b = parseFloat(document.getElementById("eq2B").value);
+            let c = parseFloat(document.getElementById("eq2C").value);
+            let d = b*b - 4*a*c;
+            let result = d < 0 ? "Vô nghiệm" : d == 0 ? "Nghiệm kép x = " + (-b / (2*a)) : "x1 = " + ((-b + Math.sqrt(d)) / (2*a)) + ", x2 = " + ((-b - Math.sqrt(d)) / (2*a));
+            document.getElementById("result7").innerText = result;
+        }
+
+        function checkAge() {
+            let age = parseInt(document.getElementById("ageCheck").value);
+            document.getElementById("result8").innerText = (age > 0 && age < 120) ? "Là tuổi người" : "Không phải tuổi người";
+        }
+        function calculateElectricityBill() {
+            let kWh = parseFloat(document.getElementById("electricity").value);
+            let totalCost = 0;
+
+            if (kWh <= 50) {
+                totalCost = kWh * 1678;
+            } else if (kWh <= 100) {
+                totalCost = 50 * 1678 + (kWh - 50) * 1734;
+            } else if (kWh <= 200) {
+                totalCost = 50 * 1678 + 50 * 1734 + (kWh - 100) * 2014;
+            } else {
+                totalCost = 50 * 1678 + 50 * 1734 + 100 * 2014 + (kWh - 200) * 2536;
+            }
+
+            document.getElementById("result10").innerText = "Tổng tiền điện: " + totalCost.toLocaleString() + " VND";
+        }
+
+        function calculateTax() {
+            let salary = parseFloat(document.getElementById("salary").value);
+            let tax = 0;
+
+            if (salary <= 5000000) {
+                tax = salary * 0.05;
+            } else if (salary <= 10000000) {
+                tax = 5000000 * 0.05 + (salary - 5000000) * 0.1;
+            } else if (salary <= 18000000) {
+                tax = 5000000 * 0.05 + 5000000 * 0.1 + (salary - 10000000) * 0.15;
+            } else {
+                tax = 5000000 * 0.05 + 5000000 * 0.1 + 8000000 * 0.15 + (salary - 18000000) * 0.2;
+            }
+
+            document.getElementById("result11").innerText = "Thuế thu nhập cá nhân: " + tax.toLocaleString() + " VND";
+        }
+
+        function calculateBankInterest() {
+            let principal = parseFloat(document.getElementById("principal").value);
+            let months = parseInt(document.getElementById("months").value);
+            let interestRate = parseFloat(document.getElementById("interestRate").value) / 100;
+            let total = principal * Math.pow(1 + interestRate, months);
+
+            document.getElementById("result12").innerText = "Tổng số tiền sau " + months + " tháng: " + total.toLocaleString() + " VND";
+        }
+    </script>
+</body>
+</html>
